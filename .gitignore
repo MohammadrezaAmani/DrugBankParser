@@ -1,0 +1,5 @@
+gamesBoard.py
+mobina.py
+*.py[cod]
+venv/
+__pycache__/
