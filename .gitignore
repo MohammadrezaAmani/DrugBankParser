@@ -3,3 +3,5 @@ mobina.py
 *.py[cod]
 venv/
 __pycache__/
+*.xml
+mobi*
