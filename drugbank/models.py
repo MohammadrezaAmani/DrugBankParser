@@ -1,7 +1,4 @@
 class Drug:
-    SMALLMOLECULE = "small molecule"
-    BIOTECH = "biotech"
-
     def __init__(
         self,
         drugbankid,
@@ -119,27 +116,9 @@ class Drug:
         self.type_ = type_
 
 
-class State:
-    SOLID = "solid"
-    LIQUID = "liquid"
-    GAS = "gas"
-
-
 class Groups:
     def __init__(self, group):
         self.group = group
-
-
-class Group:
-    """Drugs are grouped into a category like approved, experimental, illicit."""
-
-    APPROVED = "approved"
-    ILLICIT = "illicit"
-    EXPERIMENTAL = "experimental"
-    WITHDRAWN = "withdrawn"
-    NUTRACEUTICAL = "nutraceutical"
-    INVESTIGATIONAL = "investigational"
-    VET_APPROVED = "vet_approved"
 
 
 class Classification:
@@ -195,10 +174,6 @@ class Salt:
         self.monoisotopicmass = monoisotopicmass
 
 
-class Drugbankdrugsaltidvalue:
-    """['DB[0-9]{5}', 'DBSALT[0-9]{6}', 'APRD[0-9]{5}', 'BIOD[0-9]{5}', 'BTD[0-9]{5}', 'EXPT[0-9]{5}', 'NUTR[0-9]{5}']"""
-
-
 class Drugbankdrugsaltid:
     """The DrugBank ID is used to uniquely identify a drug or salt entry. There is a primary ID and several secondary IDs that come from older ID formats or merged entries."""
 
@@ -211,10 +186,6 @@ class Drugbankmetaboliteid:
 
     def __init__(self, primary):
         self.primary = primary
-
-
-class Drugbankmetaboliteidvalue:
-    """['DBMET[0-9]{5}']"""
 
 
 class Article:
@@ -486,40 +457,6 @@ class Calculatedproperty:
         self.source = source
 
 
-class Calculatedpropertysource:
-    CHEMAXON = "ChemAxon"
-    ALOGPS = "ALOGPS"
-
-
-class Calculatedpropertykind:
-    LOGP = "logP"
-    LOGS = "logS"
-    WATERSOLUBILITY = "Water Solubility"
-    IUPACNAME = "IUPAC Name"
-    TRADITIONALIUPACNAME = "Traditional IUPAC Name"
-    MOLECULARWEIGHT = "Molecular Weight"
-    MONOISOTOPICWEIGHT = "Monoisotopic Weight"
-    SMILES = "SMILES"
-    MOLECULARFORMULA = "Molecular Formula"
-    INCHI = "InChI"
-    INCHIKEY = "InChIKey"
-    POLARSURFACEAREA_PSA = "Polar Surface Area (PSA)"
-    REFRACTIVITY = "Refractivity"
-    POLARIZABILITY = "Polarizability"
-    ROTATABLEBONDCOUNT = "Rotatable Bond Count"
-    HBONDACCEPTORCOUNT = "H Bond Acceptor Count"
-    HBONDDONORCOUNT = "H Bond Donor Count"
-    PKA_STRONGESTACIDIC = "pKa (strongest acidic)"
-    PKA_STRONGESTBASIC = "pKa (strongest basic)"
-    PHYSIOLOGICALCHARGE = "Physiological Charge"
-    NUMBEROFRINGS = "Number of Rings"
-    BIOAVAILABILITY = "Bioavailability"
-    RULEOFFIVE = "Rule of Five"
-    GHOSEFILTER = "Ghose Filter"
-    MDDRLIKERULE = "MDDR-Like Rule"
-    VEBERSRULE = "Veber's Rule"
-
-
 class Experimentalpropertys:
     def __init__(self, property):
         self.property = property
@@ -530,21 +467,6 @@ class Experimentalproperty:
         self.kind = kind
         self.value = value
         self.source = source
-
-
-class Experimentalpropertykind:
-    WATERSOLUBILITY = "Water Solubility"
-    MELTINGPOINT = "Melting Point"
-    BOILINGPOINT = "Boiling Point"
-    LOGP = "logP"
-    LOGS = "logS"
-    HYDROPHOBICITY = "Hydrophobicity"
-    ISOELECTRICPOINT = "Isoelectric Point"
-    CACO2PERMEABILITY = "caco2 Permeability"
-    PKA = "pKa"
-    MOLECULARWEIGHT = "Molecular Weight"
-    MOLECULARFORMULA = "Molecular Formula"
-    RADIOACTIVITY = "Radioactivity"
 
 
 class Externalidentifiers:
@@ -558,29 +480,6 @@ class Externalidentifier:
         self.identifier = identifier
 
 
-class Externalidentifierresource:
-    UNIPROTKB = "UniProtKB"
-    WIKIPEDIA = "Wikipedia"
-    CHEBI = "ChEBI"
-    CHEMBL = "ChEMBL"
-    PUBCHEMCOMPOUND = "PubChem Compound"
-    PUBCHEMSUBSTANCE = "PubChem Substance"
-    DRUGSPRODUCTDATABASE_DPD = "Drugs Product Database (DPD)"
-    KEGGCOMPOUND = "KEGG Compound"
-    KEGGDRUG = "KEGG Drug"
-    CHEMSPIDER = "ChemSpider"
-    BINDINGDB = "BindingDB"
-    NATIONALDRUGCODEDIRECTORY = "National Drug Code Directory"
-    GENBANK = "GenBank"
-    THERAPEUTICTARGETSDATABASE = "Therapeutic Targets Database"
-    PHARMGKB = "PharmGKB"
-    PDB = "PDB"
-    IUPHAR = "IUPHAR"
-    GUIDETOPHARMACOLOGY = "Guide to Pharmacology"
-    ZINC = "ZINC"
-    RXCUI = "RxCUI"
-
-
 class Externallinks:
     def __init__(self, externallink):
         self.externallink = externallink
@@ -590,12 +489,6 @@ class Externallink:
     def __init__(self, resource, url):
         self.resource = resource
         self.url = url
-
-
-class Externallinkresource:
-    RXLIST = "RxList"
-    PDRHEALTH = "PDRhealth"
-    DRUGS_COM = "Drugs.com"
 
 
 class Pathways:
@@ -781,20 +674,6 @@ class Polypeptideexternalidentifier:
         self.identifier = identifier
 
 
-class Polypeptideexternalidentifierresource:
-    UNIPROTKB = "UniProtKB"
-    UNIPROTACCESSION = "UniProt Accession"
-    HUGOGENENOMENCLATURECOMMITTEE_HGNC = "HUGO Gene Nomenclature Committee (HGNC)"
-    HUMANPROTEINREFERENCEDATABASE_HPRD = "Human Protein Reference Database (HPRD)"
-    GENATLAS = "GenAtlas"
-    GENECARDS = "GeneCards"
-    GENBANKGENEDATABASE = "GenBank Gene Database"
-    GENBANKPROTEINDATABASE = "GenBank Protein Database"
-    CHEMBL = "ChEMBL"
-    IUPHAR = "IUPHAR"
-    GUIDETOPHARMACOLOGY = "Guide to Pharmacology"
-
-
 class Polypeptidesynonyms:
     def __init__(self, synonym):
         self.synonym = synonym
@@ -830,12 +709,6 @@ class Goclassifier:
 class Actions:
     def __init__(self, action):
         self.action = action
-
-
-class Knownaction:
-    YES = "yes"
-    NO = "no"
-    UNKNOWN = "unknown"
 
 
 class Targets:
@@ -884,19 +757,3 @@ class Transporter:
     def __init__(self, interactantgroup, position):
         self.interactantgroup = interactantgroup
         self.position = position
-
-
-class Productcountry:
-    """Drug products are currently only imported from the U.S. (FDA) and Canada (Canadian Drug Product Database, or DPD)."""
-
-    US = "US"
-    CANADA = "Canada"
-    EU = "EU"
-
-
-class Productsource:
-    """Drug products are currently only imported from the FDA and the Canadian Drug Product Database, or DPD."""
-
-    FDANDC = "FDA NDC"
-    DPD = "DPD"
-    EMA = "EMA"
