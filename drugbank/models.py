@@ -1,3 +1,27 @@
+class DrugBankID:
+    def __init__(
+        self, primary: str = None, secondary: str = None, external: str = None
+    ) -> None:
+        self.primary = primary
+        self.secondary = secondary
+        self.external = external
+
+
+class Name:
+    def __init__(self, name: str = None) -> None:
+        self.name = name
+
+
+class Name:
+    def __init__(self, name: str = None) -> None:
+        self.name = name
+
+
+class Description:
+    def __init__(self, description: str = None) -> None:
+        self.description = description
+
+
 class Drug:
     def __init__(
         self,

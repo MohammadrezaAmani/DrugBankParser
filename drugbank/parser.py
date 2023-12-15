@@ -1,56 +1,44 @@
-class XMLItem:
-    def __init__(self, tag: str, value: str, attributes: dict = {}) -> None:
-        self.tag = tag
-        self.value = value
-        self.attributes = attributes
-
+import re
+import mmap
+import io
 
 class XMLParser:
+    TAG_PATTERN = re.compile(r"<([^/][^ >/]*)")
+    ATTR_PATTERN = re.compile(r'(\w+)="([^"]*)"')
+
     def __init__(self, path: str) -> None:
         self.path = path
-        self._temp = ""
-        self.file = open(path, "r")
+        self.text = ""
+        self.file = io.open(path, "r", encoding="utf-8")
+        self.mmapped_file = mmap.mmap(self.file.fileno(), 0, access=mmap.ACCESS_READ)
 
-    def read_file(self, chunk_size: int = 4096):
-        while True:
-            data = self.file.read(chunk_size)
-            if not data:
-                break
-            yield data
+    def read_large_file(self):
+        for line in iter(self.mmapped_file.readline, b""):
+            yield line.decode("utf-8")
 
-    def __iter__(self):
-        return self
+    def find(self, string: str) -> list[str]:
+        return self.TAG_PATTERN.findall(string)
 
-    def __next__(self):
-        return self.find_tag("drug")
+    def find_attrs(self, string: str) -> dict[str, str]:
+        return dict(self.ATTR_PATTERN.findall(string))
+
+    def tag_identifier(self, line: str):
+        line = line.strip()
+        if not line or line[0] != "<":
+            self.text += line
+            return
+
+        if line.startswith("</"):
+            return
+        elif line.startswith("<?") or line.startswith("<!--"):
+            return
+
+        match = self.find(line)
+        if match:
+            tag = match[0]
+            attrs = self.find_attrs(line)
+            print(f"{tag} = {attrs}")
 
     def find_tag(self, tag: str):
-        i = 0
-        # def
-        while i < 53:
-            i += 1
-            data: str = next(self.read_file())
-            if not data:
-                break
-            end_tag = data.find("</%s>" % tag)
-            if end_tag != -1:
-                self._temp += data
-                start_tag = self._temp.find("<%s" % tag)
-                if start_tag != -1:
-                    tags = self._temp[
-                        start_tag : self._temp.find("</%s>" % tag) + len(tag) + 3
-                    ]
-                    self._temp = self._temp[
-                        self._temp.find(f"</{tag}>") + len(tag) + 3 :
-                    ]
-                    return tags
-            else:
-                self._temp += data
-
-
-if __name__ == "__main__":
-    xmlparser = XMLParser("drugbank.xml")
-    result = xmlparser.find_tag("drug")
-    result = xmlparser.find_tag("drug")
-
-    print(result)
+        for line in self.read_large_file():
+            self.tag_identifier(line)
