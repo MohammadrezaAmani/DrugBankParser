@@ -12,11 +12,6 @@ class Name:
         self.name = name
 
 
-class Name:
-    def __init__(self, name: str = None) -> None:
-        self.name = name
-
-
 class Description:
     def __init__(self, description: str = None) -> None:
         self.description = description

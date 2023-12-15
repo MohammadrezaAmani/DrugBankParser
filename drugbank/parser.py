@@ -2,6 +2,7 @@ import re
 import mmap
 import io
 
+
 class XMLParser:
     TAG_PATTERN = re.compile(r"<([^/][^ >/]*)")
     ATTR_PATTERN = re.compile(r'(\w+)="([^"]*)"')
